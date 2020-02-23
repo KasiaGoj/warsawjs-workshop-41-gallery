@@ -3,7 +3,7 @@ function renderPhoto (photo){
     console.log('photo', photo);
     //create the html image element
     const $photo = document.createElement('img');
-    $photo.src = photo;
+    $photo.src = photo.url;
     //render process
     const $photos = document.querySelector('#photos');
     $photos.append($photo);
@@ -17,7 +17,12 @@ function renderPhotos (photos){
 
     //}
     photos.forEach(function(photo){
-        renderPhoto(photo);
+        try {
+            renderPhoto(photo);
+        }
+        catch {
+            renderPhoto ({ url: 'https://placehold.co/200x300'});
+        }
 
     });
 }
@@ -57,20 +62,28 @@ function displayEmptyGalleryMessage (){
 
 //declaration
 function main() {
-    console.log('main function works');
+    
+    loader.show();
+
+    setTimeout (function (){
     const photos = [
-        "https://i.picsum.photos/id/1036/200/300.jpg",
-        "https://i.picsum.photos/id/1035/200/300.jpg",
-        "https://i.picsum.photos/id/1033/200/300.jpg",
+        { url: "https://i.picsum.photos/id/1036/200/300.jpg" },
+        { url: "https://i.picsum.photos/id/1035/200/300.jpg" },
+        { url: "https://i.picsum.photos/id/1033/200/300.jpg" },
+        null
     ];
     const isGalleryEmpty = (photos.length === 0);
+
+    loader.hide();
+    
     if (isGalleryEmpty) {
         displayEmptyGalleryMessage();  
     }
     else {
           renderPhotos(photos);
     }
-
+    }, 2000);
+    //po 2 sekundach gallery shows
 }
 
 //function invoke
