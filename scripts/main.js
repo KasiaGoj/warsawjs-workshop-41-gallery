@@ -71,9 +71,32 @@ function displayCurrentTime() {
         $clock.textContent = currentDate;
     }, 1000);
 }
+
+// Math random () => from 0 to 1
+// Math random () *4 = from 0 to 4
+// Math random () *4 +2 = from 2 to 6
+
+function randomInteger(from, to) {
+    return Math.round(Math.random() * (to - from) + from);
+}
+
+function displayRandomPhoto(photos) {
+
+    // 1. reference to DOM element
+    const $container = document.querySelector('#random-photo')
+    // 2. generate random number
+    const number = randomInteger(0, 2);
+    // 3. get the photo from photos collection
+    const randomPhoto = photos[number];
+    // 4. render photo
+    const $randomPhoto = document.createElement('img');
+    $randomPhoto.src = randomPhoto.url;
+    $container.append($randomPhoto);
+}
+
 //declaration
 function main() {
-    displayCurrentTime ();
+    displayCurrentTime();
     loader.show();
 
     setTimeout(function () {
@@ -93,8 +116,9 @@ function main() {
         else {
             renderPhotos(photos);
         }
-    }, 2000);
-    //po 2 sekundach gallery shows
+        displayRandomPhoto(photos)
+    }, 1000);
+    //po 2 sekundach (2000) gallery shows
 }
 
 //function invoke
