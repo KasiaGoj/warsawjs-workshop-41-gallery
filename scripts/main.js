@@ -119,6 +119,28 @@ function main() {
         displayRandomPhoto(photos)
     }, 1000);
     //po 2 sekundach (2000) gallery shows
+
+    window.addEventListener('hashchange', function(){
+        console.log('hash is changed', location.hash);
+
+        const $photos = document.querySelector('#photos')
+        const $randomPhoto = document.querySelector('#random-photo')
+        if (location.hash.length === 0 ){
+            //console.warn('hash is empty');
+            // 1. Hide random photo container
+            $randomPhoto.style.display = 'none';
+            // 2. Show gallery container
+            $photos.style.display = 'block';
+        }
+        if (location.hash === '#random'){
+            // 1. Show random photo container
+            $randomPhoto.style.display = 'block';
+            // 2. Hide gallery container
+            $photos.style.display = 'none';
+            
+        }
+
+    });
 }
 
 //function invoke
