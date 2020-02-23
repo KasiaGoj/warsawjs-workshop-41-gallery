@@ -10,7 +10,7 @@
 
 ## Demo 🎉
 
-<https://piecioshka.github.io/warsawjs-workshop-41-gallery>
+<https://KasiaGoj.github.io/warsawjs-workshop-41-gallery>
 
 ## Links
 
