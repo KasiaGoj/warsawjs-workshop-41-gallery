@@ -1,4 +1,4 @@
-function renderPhoto (photo){
+function renderPhoto(photo) {
 
     console.log('photo', photo);
     //create the html image element
@@ -9,29 +9,29 @@ function renderPhoto (photo){
     $photos.append($photo);
 }
 
-function renderPhotos (photos){
-   // for (let i = 0; i < photos.length; i++) {
-     //   const photo = photos[i];
-       // renderPhoto(photo);
-        //longer version of the above line would be: $photo.setAttribute('src', photo);
+function renderPhotos(photos) {
+    // for (let i = 0; i < photos.length; i++) {
+    //   const photo = photos[i];
+    // renderPhoto(photo);
+    //longer version of the above line would be: $photo.setAttribute('src', photo);
 
     //}
-    photos.forEach(function(photo){
+    photos.forEach(function (photo) {
         try {
             renderPhoto(photo);
         }
         catch {
-            renderPhoto ({ url: 'https://placehold.co/200x300'});
+            renderPhoto({ url: 'https://placehold.co/200x300' });
         }
 
     });
 }
 
-function displayMessage (message) {
+function displayMessage(message) {
     const $photos = document.querySelector('#photos');
     const $message = document.createElement('div');
     $message.classList.add('message');
-    
+
     // const $header =document.createElement('div');
     // $header.classList.add('message-header');
     // $header.textContent = 'Message to the user';
@@ -53,35 +53,46 @@ function displayMessage (message) {
             ${message}
         </div>
         `;
-    
+
 }
 
-function displayEmptyGalleryMessage (){
-    displayMessage("Gallery is empty. No pictures. Sorry");   
+function displayEmptyGalleryMessage() {
+    displayMessage("Gallery is empty. No pictures. Sorry");
 }
 
+function displayCurrentTime() {
+    setInterval(function () {
+        // 1. get reference to DOM
+        const $clock = document.querySelector('#current-time');
+        // 2. get current time from date object
+        const date = new Date();
+        const currentDate = date.toLocaleTimeString('pl');
+        // 3. Render time into DOM element
+        $clock.textContent = currentDate;
+    }, 1000);
+}
 //declaration
 function main() {
-    
+    displayCurrentTime ();
     loader.show();
 
-    setTimeout (function (){
-    const photos = [
-        { url: "https://i.picsum.photos/id/1036/200/300.jpg" },
-        { url: "https://i.picsum.photos/id/1035/200/300.jpg" },
-        { url: "https://i.picsum.photos/id/1033/200/300.jpg" },
-        null
-    ];
-    const isGalleryEmpty = (photos.length === 0);
+    setTimeout(function () {
+        const photos = [
+            { url: "https://i.picsum.photos/id/1036/200/300.jpg" },
+            { url: "https://i.picsum.photos/id/1035/200/300.jpg" },
+            { url: "https://i.picsum.photos/id/1033/200/300.jpg" },
+            null
+        ];
+        const isGalleryEmpty = (photos.length === 0);
 
-    loader.hide();
-    
-    if (isGalleryEmpty) {
-        displayEmptyGalleryMessage();  
-    }
-    else {
-          renderPhotos(photos);
-    }
+        loader.hide();
+
+        if (isGalleryEmpty) {
+            displayEmptyGalleryMessage();
+        }
+        else {
+            renderPhotos(photos);
+        }
     }, 2000);
     //po 2 sekundach gallery shows
 }
